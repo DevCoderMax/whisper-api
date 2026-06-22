@@ -29,6 +29,23 @@ sudo apt install ffmpeg
 
 ## Instalação
 
+Instalação rápida no Linux/macOS:
+
+```bash
+chmod +x setup.sh
+./setup.sh
+```
+
+Instalação rápida no Windows:
+
+```bat
+setup.bat
+```
+
+Os scripts criam/reutilizam o `venv`, instalam as dependências da API, instalam as dependências do frontend e copiam `.env.example` para `.env` quando o arquivo ainda não existe.
+
+Instalação manual:
+
 ```bash
 # 1. Entrar na pasta do projeto
 cd whisper-api
@@ -316,6 +333,8 @@ whisper-api/
 ├── outputs/                    # Histórico persistido em history.json
 ├── web/                        # Frontend React/Vite
 ├── .env.example
+├── setup.sh                    # Setup do projeto no Linux/macOS
+├── setup.bat                   # Setup do projeto no Windows
 ├── requirements.txt
 └── README.md
 ```
