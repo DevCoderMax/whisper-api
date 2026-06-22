@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Tema preto e branco — suavizado para descanso visual.
+   Light mode:
+     background  #fafafa  (off-white quase imperceptível)
+     foreground  #0a0a0a  (off-black)
+     border/ring #0a0a0a
+     muted       #f4f4f4  (superfície auxiliar, +cartões, áreas de descanso)
+     muted-fg    #525252  (texto secundário)
+
+   Dark mode:
+     background  #0a0a0a
+     foreground  #fafafa
+     border/ring #fafafa
+     muted       #171717
+     muted-fg    #a3a3a3
+   ============================================================ */
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 0 0% 4%;
+
+    --border: 0 0% 4%;
+    --ring: 0 0% 4%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 32%;
+
+    --primary: 0 0% 4%;
+    --primary-foreground: 0 0% 98%;
+
+    --radius: 0px;
+  }
+
+  .dark {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
+
+    --border: 0 0% 98%;
+    --ring: 0 0% 98%;
+
+    --muted: 0 0% 9%;
+    --muted-foreground: 0 0% 64%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 4%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html,
+  body,
+  #root {
+    @apply h-full;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    /* transição suave ao trocar tema */
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+
+  /* Foco acessível WCAG: outline sólido de 2px, sem cor intermediária */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  /* Sem seleção padrão em chrome escuro */
+  ::selection {
+    background: hsl(var(--foreground));
+    color: hsl(var(--background));
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    letter-spacing: -0.02em;
+  }
+
+  /* Superfície de descanso — fundo levemente diferente do background principal */
+  .surface-muted {
+    background-color: hsl(var(--muted));
+    color: hsl(var(--muted-foreground));
+  }
+}
