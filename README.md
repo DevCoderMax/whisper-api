@@ -2,6 +2,10 @@
 
 API de transcrição e geração de legendas (SRT/VTT) usando Faster-Whisper + FastAPI.
 
+<p align="center">
+  <img src="assets/screenshot.png" alt="Interface do Faster-Whisper API" width="900">
+</p>
+
 ## Requisitos
 
 - Python 3.10+
