@@ -14,7 +14,6 @@ export const Route = createFileRoute("/transcribe")({
 });
 
 const ALLOWED_EXT = [".mp3", ".mp4", ".wav", ".m4a", ".ogg", ".flac", ".mkv", ".webm", ".mov"];
-const DEFAULT_MAX_MB = 500;
 
 function TranscribePage() {
   const [modelsInfo, setModelsInfo] = useState<ModelsResponse | null>(null);
@@ -152,7 +151,7 @@ function TranscribePage() {
       <FocusLayout>
         <Dropzone
           accept={ALLOWED_EXT}
-          maxBytes={(modelsInfo.max_upload_size_mb ?? DEFAULT_MAX_MB) * 1024 * 1024}
+          maxBytes={modelsInfo.max_upload_size_mb * 1024 * 1024}
           onFile={(f) => {
             setSubmitError(null);
             setFile(f);

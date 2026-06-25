@@ -24,10 +24,16 @@ def _save_upload(file: UploadFile) -> tuple[str, int, str]:
             status_code=400,
             detail=f"Formato não suportado: {ext}. Use: {', '.join(ALLOWED_EXTENSIONS)}",
         )
+    contents = file.file.read()
+    max_bytes = settings.MAX_UPLOAD_SIZE_MB * 1024 * 1024
+    if len(contents) > max_bytes:
+        raise HTTPException(
+            status_code=413,
+            detail=f"Arquivo muito grande ({len(contents) // (1024 * 1024)} MB). Limite: {settings.MAX_UPLOAD_SIZE_MB} MB.",
+        )
     os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
     stored_name = f"{uuid.uuid4().hex}{ext}"
     path = os.path.join(settings.UPLOAD_DIR, stored_name)
-    contents = file.file.read()
     with open(path, "wb") as f:
         f.write(contents)
     return path, len(contents), file.filename or stored_name

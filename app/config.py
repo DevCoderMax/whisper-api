@@ -1,9 +1,7 @@
 from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from functools import lru_cache
 
 AVAILABLE_MODELS = ["tiny", "small", "medium", "large-v2", "large-v3"]
-
 
 class Settings(BaseSettings):
     # Modelo
@@ -17,7 +15,7 @@ class Settings(BaseSettings):
     WHISPER_CPU_THREADS: int = 4
 
     # Upload
-    MAX_UPLOAD_SIZE_MB: int = 500
+    MAX_UPLOAD_SIZE_MB: int = 600
     UPLOAD_DIR: str = "uploads"
     OUTPUT_DIR: str = "outputs"
 
@@ -48,6 +46,5 @@ class Settings(BaseSettings):
         return v
 
 
-@lru_cache()
 def get_settings() -> Settings:
     return Settings()

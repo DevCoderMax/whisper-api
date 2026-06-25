@@ -20,9 +20,7 @@ import {
 const ALLOWED_EXT = [
   ".mp3", ".mp4", ".wav", ".m4a", ".ogg", ".flac", ".mkv", ".webm", ".mov",
 ];
-const DEFAULT_MAX_MB = 500;
-
-export type SubtitleFormat = "srt" | "vtt" | "both";
+export type SubtitleFormat = "srt" | "vtt" | "both" | "burn";
 
 export interface SubtitleFlowProps {
   format: SubtitleFormat;
@@ -89,6 +87,8 @@ export function SubtitleFlow({ format, title, subtitle }: SubtitleFlowProps) {
         setSingle(await api.subtitleSrt(form));
       } else if (format === "vtt") {
         setSingle(await api.subtitleVtt(form));
+      } else if (format === "burn") {
+        throw new ApiError("Funcionalidade ainda não implementada", 501, null);
       } else {
         const r = await api.subtitleBoth(form);
         setBoth({ srt: r.srt, vtt: r.vtt });
@@ -183,7 +183,7 @@ export function SubtitleFlow({ format, title, subtitle }: SubtitleFlowProps) {
       <FocusLayout>
         <Dropzone
           accept={ALLOWED_EXT}
-          maxBytes={(modelsInfo.max_upload_size_mb ?? DEFAULT_MAX_MB) * 1024 * 1024}
+          maxBytes={modelsInfo.max_upload_size_mb * 1024 * 1024}
           onFile={(f) => {
             setSubmitError(null);
             setFile(f);

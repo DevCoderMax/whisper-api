@@ -5,6 +5,7 @@ import {
   Captions,
   Subtitles,
   FileText,
+  Film,
   Cpu,
   History as HistoryIcon,
   ArrowUpRight,
@@ -27,6 +28,7 @@ interface Feature {
   to: string;
   available: boolean;
   badge?: number;
+  tag?: string;
 }
 
 function HomePage() {
@@ -79,6 +81,14 @@ function HomePage() {
       icon: FileText,
       to: "/subtitle/both",
       available: true,
+    },
+    {
+      title: "Adicionar legenda ao vídeo",
+      description: "Incorpora legendas diretamente no arquivo de vídeo.",
+      icon: Film,
+      to: "/subtitle/burn",
+      available: true,
+      tag: "em breve",
     },
     {
       title: "Gerenciar modelos",
@@ -153,6 +163,11 @@ function FeatureCard({ feature }: { feature: Feature }) {
             <Icon className="h-5 w-5" />
           </CardIcon>
           <div className="flex items-center gap-2">
+            {feature.tag && (
+              <span className="border border-foreground/40 bg-muted px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                {feature.tag}
+              </span>
+            )}
             {typeof feature.badge === "number" && feature.badge > 0 && (
               <span
                 className="border border-foreground bg-foreground px-1.5 py-0.5 font-mono text-[10px] font-bold text-background"
