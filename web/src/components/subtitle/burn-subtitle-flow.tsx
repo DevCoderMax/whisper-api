@@ -68,11 +68,36 @@ export function BurnSubtitleFlow() {
   };
 
   const handleSubmit = async () => {
-    if (!videoFile || !params) return;
+    if (!videoFile) return;
     setSubmitting(true);
     setSubmitError(null);
     try {
-      throw new ApiError("Funcionalidade ainda não implementada", 501, null);
+      const form = new FormData();
+      form.append("file", videoFile);
+
+      if (mode === "srt" && srtFile) {
+        form.append("subtitle_file", srtFile);
+      } else if (mode === "transcribe" && params) {
+        form.append("language", params.language);
+        form.append("model", params.model);
+        form.append("word_timestamps", String(params.word_timestamps));
+        form.append("vad_filter", String(params.vad_filter));
+        form.append("ffmpeg_convert", String(params.ffmpeg_convert));
+      }
+
+      const blob = await api.subtitleBurn(form);
+
+      // Trigger download
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = videoFile.name.replace(/\.[^.]+$/, "") + "_subtitled.mp4";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      setResult("done");
     } catch (e) {
       const msg = e instanceof ApiError ? e.message : "Erro desconhecido";
       setSubmitError(msg);
@@ -129,11 +154,8 @@ export function BurnSubtitleFlow() {
         <div className="mx-auto max-w-5xl space-y-6 px-6 py-8">
           <header>
             <h1 className="font-display text-2xl font-bold uppercase">Adicionar legenda ao vídeo</h1>
-            <p className="mt-1 text-sm text-muted-foreground">Legenda incorporada com sucesso.</p>
+            <p className="mt-1 text-sm text-muted-foreground">Legenda incorporada com sucesso. O download já foi iniciado.</p>
           </header>
-          <div className="border border-foreground bg-muted p-4">
-            <p className="font-mono text-sm">Funcionalidade ainda não implementada no backend.</p>
-          </div>
           <div className="flex justify-end">
             <Button variant="outline" onClick={reset}>
               Nova legenda

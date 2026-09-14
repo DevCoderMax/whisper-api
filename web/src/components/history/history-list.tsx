@@ -27,6 +27,7 @@ function formatLabel(fmt: HistoryEntry["format"]): string {
     case "srt": return "SRT";
     case "vtt": return "VTT";
     case "both": return "SRT + VTT";
+    case "burn": return "Legenda no Vídeo";
   }
 }
 

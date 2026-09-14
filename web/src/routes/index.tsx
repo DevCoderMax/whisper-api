@@ -88,7 +88,6 @@ function HomePage() {
       icon: Film,
       to: "/subtitle/burn",
       available: true,
-      tag: "em breve",
     },
     {
       title: "Gerenciar modelos",

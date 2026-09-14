@@ -14,8 +14,8 @@ import uuid
 from pathlib import Path
 from typing import Any, Literal
 
-# Formatos suportados: "transcribe" (JSON puro), "srt", "vtt", "both"
-FormatType = Literal["transcribe", "srt", "vtt", "both"]
+# Formatos suportados: "transcribe" (JSON puro), "srt", "vtt", "both", "burn"
+FormatType = Literal["transcribe", "srt", "vtt", "both", "burn"]
 
 # Local do JSON de histórico
 HISTORY_FILE = Path(__file__).resolve().parents[2] / "outputs" / "history.json"

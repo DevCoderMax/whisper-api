@@ -1,81 +1,76 @@
-# AGENTS.md — Whisper API
+# AGENTS.md
 
-## Stack
+## Meta-regra — gestão de arquivos de configuração
 
-- **Backend**: Python 3.10+ / FastAPI / Faster-Whisper / pydantic-settings
-- **Frontend**: React 19 / TypeScript / Vite / Tailwind CSS / TanStack Router (file-based) / Zustand
-- **UI components**: Custom shadcn-style (class-variance-authority + tailwind-merge), no component library
-- **External**: ffmpeg (system dependency), Context7 MCP (library docs)
+### Arquivos que você NUNCA deve editar sem permissão explícita:
+- `AGENTS.md` (este arquivo)
+- `.mimocode/mimocode.json`
 
-## Commands
+### Arquivos que você PODE e DEVE manter atualizados:
+- `MEMORY.md` — atualiza com decisões e aprendizados do projeto
+- `specs/**/*.md` — cria e atualiza durante o workflow de features
 
-### API (backend)
+---
 
-```bash
-# From project root, with venv activated:
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-```
+## Documentação de bibliotecas — OBRIGATÓRIO
 
-### Frontend
+SEMPRE que for escrever, sugerir ou revisar código que envolva qualquer
+biblioteca ou framework externo, você DEVE usar as ferramentas do Context7
+MCP antes de responder:
 
-```bash
-cd web
-npm install          # first time only
-npm run dev          # Vite dev server on :5173
-npm run build        # tsc + vite build
-npm run lint         # typecheck only (tsc --noEmit)
-```
+1. `resolve-library-id` — para encontrar o ID da biblioteca
+2. `query-docs` — para buscar a documentação atualizada
 
-**No test suite exists.** There are no test files, no pytest config, no test scripts. `npm run lint` is the only CI-like check (TypeScript type-checking).
+Nunca use o que está no seu training data para APIs externas.
+O training data pode estar desatualizado. A documentação real vem do Context7.
 
-### Setup scripts
+Exemplos de quando usar:
+- "Como configuro middleware no Fastify?" → busca no mcp Context7 antes de responder
+- "Cria um componente React com useEffect" → busca no mcp Context7 antes de responder
+- "Gera uma migration com Prisma" → busca no mcp Context7 antes de responder
 
-```bash
-chmod +x setup.sh && ./setup.sh   # Linux/macOS
-setup.bat                          # Windows
-```
+---
 
-Creates venv, installs Python + Node deps, copies `.env.example` → `.env`.
+## Organização e modularização — OBRIGATÓRIO
 
-## Architecture
+Nunca escreva código monolítico. Sempre separe por responsabilidade:
 
-### Backend (`app/`)
+- Cada arquivo tem uma única responsabilidade clara
+- Funções gigantes devem ser quebradas se o arquivo estiver extenso
+- Lógica de negócio separada de I/O (banco, HTTP, filesystem)
+- Componentes/módulos reutilizáveis extraídos para pastas próprias
+- Imports organizados: externos → internos → relativos
 
-- `app/main.py` — FastAPI entry, mounts CORS (allow all), includes routers under `/api/v1`
-- `app/config.py` — `Settings` via `pydantic-settings`, reads `.env` with `@lru_cache`
-- `app/routers/transcription.py` — `/transcribe`, `/subtitle/*`, `/models/*`
-- `app/routers/history.py` — `/history` CRUD
-- `app/services/` — business logic: `whisper_service.py` (model cache + transcription), `subtitle_service.py` (SRT/VTT generation), `ffmpeg_service.py`, `history_service.py`
-- Model auto-unloads after `MODEL_UNLOAD_TIMEOUT` seconds of inactivity
+Antes de implementar qualquer coisa, pergunte:
+"Esse código pertence aqui ou deveria estar em um módulo separado?"
 
-### Frontend (`web/src/`)
+---
 
-- **TanStack Router** with file-based routing — route files in `web/src/routes/`, auto-generates `routeTree.gen.ts` via Vite plugin
-- **Adding a new page**: create a file in `web/src/routes/`, export `Route = createFileRoute("/path")({...})`. The route tree regenerates automatically on next build/dev.
-- **Components** organized by feature: `components/transcribe/`, `components/subtitle/`, `components/history/`, `components/models/`, `components/layout/`, `components/ui/`
-- **Shared UI primitives** in `components/ui/` (button, card, input, label, select, switch, mode-toggle)
-- **API client**: `lib/api.ts` — typed fetch wrapper, all endpoints defined as `api.xxx()` functions. Add new endpoints here.
-- **State**: Zustand store in `stores/` (currently only `theme.ts`)
-- **Styling**: Tailwind CSS with `@/` alias → `./src/`. Custom theme in `tailwind.config.ts` (HSL CSS variables, `darkMode: "class"`, Inter + JetBrains Mono fonts, radius=0 design)
-- **Layout pattern**: `FocusLayout` wraps all task pages (dropzone → config → result flow)
+## Workflow de features — OBRIGATÓRIO
 
-### Home page (`routes/index.tsx`)
+Quando solicitado a criar uma feature, ferramenta ou projeto novo,
+siga esta ordem sem pular etapas:
 
-The home page renders a `features` array of `Feature` objects — each has `title`, `description`, `icon` (from lucide-react), `to` (route path), and `available`. Adding a new button to the home grid means appending to this array.
+1. Crie `specs/<nome>/requirements.md` com:
+   - Objetivo da feature
+   - User stories: "Como [persona], quero [ação] para [benefício]"
+   - Critérios de aceitação
 
-## Conventions
+2. Crie `specs/<nome>/design.md` com:
+   - Decisões de arquitetura e trade-offs
+   - Diagrama de fluxo em mermaid
+   - Interfaces e tipos principais
 
-- **Language**: Code comments and UI text are in Portuguese (Brazilian)
-- **Imports**: `@/` alias maps to `web/src/`. Use it for all local imports.
-- **Component pattern**: Functional components, hooks, no class components. State via `useState` + `useEffect`, shared state via Zustand.
-- **Error handling**: API errors thrown as `ApiError` (custom class in `lib/api.ts`), caught in components with user-facing messages
-- **File naming**: kebab-case for component files (`subtitle-flow.tsx`), camelCase for utility files (`api.ts`, `utils.ts`)
-- **No comments**: Do not add code comments unless explicitly asked
+3. Crie `specs/<nome>/tasks.md` com:
+   - Checklist executável ordenado por dependência
+   - Cada task deve ser atômica e verificável
 
-## Gotchas
+4. Aguarde aprovação explícita antes de implementar qualquer código
 
-- `web/src/routeTree.gen.ts` is auto-generated by TanStack Router Vite plugin — never edit manually
-- The API uses `large-v3` as default in code, but `.env.example` ships `small` for lower VRAM usage
-- `uploads/` and `outputs/` are gitignored runtime dirs — never commit files there
-- CORS is wide open (`allow_origins=["*"]`) — fine for local dev, not for production
-- Context7 MCP is configured in `mimocode.json` — always query it before using any external library API
+---
+
+## Stack do projeto
+- (preencha: linguagem, framework, banco, libs principais)
+
+## Padrões de código
+- (preencha: convenções, estrutura de pastas, nomenclatura)

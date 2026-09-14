@@ -91,7 +91,7 @@ export interface ModelsStatus {
   loaded_models: Record<string, ModelStatusEntry>;
 }
 
-export type HistoryFormat = "transcribe" | "srt" | "vtt" | "both";
+export type HistoryFormat = "transcribe" | "srt" | "vtt" | "both" | "burn";
 
 export interface HistoryEntry {
   id: string;
@@ -152,6 +152,23 @@ export const api = {
       "/api/v1/subtitle/both",
       { method: "POST", body: form },
     ),
+
+  subtitleBurn: (form: FormData): Promise<Blob> =>
+    fetch(`${BASE_URL}/api/v1/subtitle/burn`, {
+      method: "POST",
+      body: form,
+    }).then((res) => {
+      if (!res.ok) {
+        return res.json().then((body) => {
+          const message =
+            typeof body === "object" && body && "detail" in body
+              ? String((body as { detail: unknown }).detail)
+              : res.statusText;
+          throw new ApiError(message, res.status, body);
+        });
+      }
+      return res.blob();
+    }),
 
   listHistory: () => request<HistoryEntry[]>("/api/v1/history"),
   getHistory: (id: string) => request<HistoryDetail>(`/api/v1/history/${id}`),

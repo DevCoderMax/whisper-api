@@ -48,6 +48,42 @@ def convert_to_wav(input_path: str) -> str:
         )
 
 
+def burn_subtitle(video_path: str, srt_path: str) -> str:
+    """
+    Incrusta legenda SRT no vídeo via FFmpeg (hardcoded).
+    Retorna o caminho do vídeo de saída.
+    """
+    output_path = video_path.rsplit(".", 1)[0] + "_subtitled.mp4"
+
+    cmd = [
+        "ffmpeg",
+        "-y",
+        "-i", video_path,
+        "-vf", f"subtitles={srt_path}",
+        "-c:a", "copy",
+        output_path,
+    ]
+
+    try:
+        result = subprocess.run(
+            cmd,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
+            timeout=600,
+        )
+        if result.returncode != 0:
+            error = result.stderr.decode("utf-8", errors="ignore")
+            raise RuntimeError(f"ffmpeg falhou ao incorporar legenda: {error}")
+
+        logger.info(f"Vídeo com legenda gerado: {output_path}")
+        return output_path
+
+    except FileNotFoundError:
+        raise RuntimeError(
+            "ffmpeg não encontrado. Instale com: sudo apt install ffmpeg"
+        )
+
+
 def cleanup(path: str):
     try:
         if path and os.path.exists(path):

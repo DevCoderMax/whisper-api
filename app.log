@@ -1,0 +1,171 @@
+2026-07-07 18:36:57,841 - uvicorn.error - INFO - Started server process [2567703]
+2026-07-07 18:36:57,841 - uvicorn.error - INFO - Waiting for application startup.
+2026-07-07 18:36:57,842 - uvicorn.error - INFO - Application startup complete.
+2026-07-07 18:36:57,844 - uvicorn.error - ERROR - [Errno 98] error while attempting to bind on address ('0.0.0.0', 8000): address already in use
+2026-07-07 18:36:57,844 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-07-07 18:36:57,844 - uvicorn.error - INFO - Application shutdown complete.
+2026-07-07 18:39:06,780 - uvicorn.error - INFO - Started server process [2568308]
+2026-07-07 18:39:06,780 - uvicorn.error - INFO - Waiting for application startup.
+2026-07-07 18:39:06,780 - uvicorn.error - INFO - Application startup complete.
+2026-07-07 18:39:06,783 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-07-07 20:22:29,600 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-07 20:22:31,252 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-07 20:22:33,874 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-07 20:22:42,791 - uvicorn.access - INFO - 106.75.18.165:62874 - "GET /api/v2/heartbeat HTTP/1.1" 404
+2026-07-07 20:22:43,424 - uvicorn.access - INFO - 106.75.18.165:63000 - "GET / HTTP/1.1" 200
+2026-07-07 20:22:44,084 - uvicorn.access - INFO - 106.75.18.165:63072 - "GET / HTTP/1.1" 200
+2026-07-07 20:22:44,902 - uvicorn.access - INFO - 106.75.18.165:63100 - "GET /favicon.ico HTTP/1.1" 404
+2026-07-07 21:10:36,311 - uvicorn.access - INFO - 192.141.18.67:35696 - "GET /api/v1/history HTTP/1.1" 200
+2026-07-07 21:10:36,336 - uvicorn.access - INFO - 192.141.18.67:35704 - "GET /api/v1/history HTTP/1.1" 200
+2026-07-07 21:10:37,416 - uvicorn.access - INFO - 192.141.18.67:35704 - "GET /api/v1/history HTTP/1.1" 200
+2026-07-07 21:10:37,443 - uvicorn.access - INFO - 192.141.18.67:35696 - "GET /api/v1/history HTTP/1.1" 200
+2026-07-07 21:10:37,472 - uvicorn.access - INFO - 192.141.18.67:35704 - "GET /api/v1/history HTTP/1.1" 200
+2026-07-07 21:10:37,498 - uvicorn.access - INFO - 192.141.18.67:35696 - "GET /api/v1/history HTTP/1.1" 200
+2026-07-07 21:10:37,578 - uvicorn.access - INFO - 192.141.18.67:35716 - "GET /api/v1/history/e9eaedb68be0/audio HTTP/1.1" 206
+2026-07-07 21:10:37,594 - uvicorn.access - INFO - 192.141.18.67:35730 - "GET /api/v1/history/7a0bddcb85ef/audio HTTP/1.1" 206
+2026-07-07 21:10:37,595 - uvicorn.access - INFO - 192.141.18.67:35738 - "GET /api/v1/history/09efd2169636/audio HTTP/1.1" 206
+2026-07-07 21:10:37,744 - uvicorn.access - INFO - 192.141.18.67:35774 - "GET /api/v1/history/88ccea6c23e2/audio HTTP/1.1" 206
+2026-07-07 21:10:45,226 - uvicorn.access - INFO - 192.141.18.67:34586 - "GET /api/v1/history HTTP/1.1" 200
+2026-07-07 21:10:45,256 - uvicorn.access - INFO - 192.141.18.67:34586 - "GET /api/v1/history HTTP/1.1" 200
+2026-07-08 00:01:39,246 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-08 00:01:50,497 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-08 00:01:51,132 - uvicorn.access - INFO - 45.82.78.105:40862 - "GET / HTTP/1.1" 200
+2026-07-08 00:01:55,861 - uvicorn.access - INFO - 45.131.155.110:55782 - "GET /favicon.ico HTTP/1.1" 404
+2026-07-08 09:17:23,995 - uvicorn.access - INFO - 139.224.0.39:19624 - "HEAD /pscc/ HTTP/1.1" 404
+2026-07-08 09:17:23,999 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-08 09:17:24,003 - uvicorn.access - INFO - 139.224.0.39:19625 - "HEAD /start/index.html HTTP/1.1" 404
+2026-07-08 09:17:25,053 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-08 11:42:47,048 - uvicorn.access - INFO - 20.171.28.177:51892 - "GET / HTTP/1.1" 200
+2026-07-08 11:42:52,366 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-08 11:45:38,411 - uvicorn.access - INFO - 85.217.149.7:52796 - "GET / HTTP/1.1" 200
+2026-07-08 13:19:17,540 - uvicorn.access - INFO - 103.203.57.20:58880 - "GET / HTTP/1.1" 200
+2026-07-08 13:23:28,215 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-08 13:23:28,499 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-08 19:30:52,520 - uvicorn.access - INFO - 45.205.1.223:58430 - "GET / HTTP/1.1" 200
+2026-07-08 21:13:28,886 - uvicorn.access - INFO - 45.156.129.191:53278 - "GET / HTTP/1.1" 200
+2026-07-09 02:37:35,328 - uvicorn.access - INFO - 167.94.146.48:30598 - "GET / HTTP/1.1" 200
+2026-07-09 02:37:45,664 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-09 02:37:46,570 - uvicorn.access - INFO - 167.94.146.48:38160 - "GET / HTTP/1.1" 200
+2026-07-09 02:37:47,016 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-09 02:37:47,523 - uvicorn.access - INFO - 167.94.146.48:38194 - "GET /favicon.ico HTTP/1.1" 404
+2026-07-09 02:37:51,077 - uvicorn.access - INFO - 167.94.146.48:38272 - "POST /mcp HTTP/1.1" 404
+2026-07-09 02:37:51,577 - uvicorn.access - INFO - 167.94.146.48:38294 - "POST /jsonrpc HTTP/1.1" 404
+2026-07-09 02:37:51,997 - uvicorn.access - INFO - 167.94.146.48:38324 - "POST / HTTP/1.1" 405
+2026-07-09 02:37:59,626 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-09 02:38:00,052 - uvicorn.access - INFO - 167.94.146.48:42456 - "GET /login HTTP/1.1" 404
+2026-07-09 04:51:56,542 - uvicorn.access - INFO - 118.243.65.128:53549 - "GET / HTTP/1.0" 200
+2026-07-09 16:50:33,035 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-09 16:50:37,620 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-09 16:50:40,621 - uvicorn.access - INFO - 199.45.155.77:54188 - "GET / HTTP/1.1" 200
+2026-07-09 16:50:42,557 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-09 16:50:43,728 - uvicorn.access - INFO - 199.45.155.77:54244 - "GET /favicon.ico HTTP/1.1" 404
+2026-07-09 16:50:52,925 - uvicorn.access - INFO - 199.45.155.77:58706 - "POST /mcp HTTP/1.1" 404
+2026-07-09 16:50:53,961 - uvicorn.access - INFO - 199.45.155.77:58768 - "POST /jsonrpc HTTP/1.1" 404
+2026-07-09 16:50:55,060 - uvicorn.access - INFO - 199.45.155.77:58780 - "POST / HTTP/1.1" 405
+2026-07-09 16:51:07,154 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-09 16:51:09,500 - uvicorn.access - INFO - 199.45.155.77:60286 - "GET /login HTTP/1.1" 404
+2026-07-09 18:09:09,561 - uvicorn.access - INFO - 186.204.231.36:56330 - "DESCRIBE /0x8b6c42 HTTP/1.0" 404
+2026-07-09 20:21:06,696 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-09 20:21:06,958 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-09 22:38:42,016 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-09 22:38:42,316 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-09 22:53:37,273 - uvicorn.access - INFO - 198.23.242.162:57838 - "GET /v2 HTTP/1.1" 404
+2026-07-09 22:54:07,949 - uvicorn.access - INFO - 195.96.139.49:41631 - "GET / HTTP/1.1" 200
+2026-07-10 06:42:12,161 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-10 06:56:03,801 - uvicorn.access - INFO - 20.94.216.122:52948 - "GET / HTTP/1.1" 200
+2026-07-10 06:56:04,757 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-10 07:04:51,432 - uvicorn.access - INFO - 144.126.230.140:57866 - "GET / HTTP/1.1" 200
+2026-07-10 07:04:51,810 - uvicorn.access - INFO - 144.126.230.140:57882 - "GET /favicon.ico HTTP/1.1" 404
+2026-07-10 07:37:26,411 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-10 07:37:27,024 - uvicorn.access - INFO - 47.84.114.31:34868 - "GET / HTTP/1.1" 200
+2026-07-10 07:38:03,084 - uvicorn.access - INFO - 123.160.223.74:58742 - "GET / HTTP/1.1" 200
+2026-07-10 07:38:04,752 - uvicorn.access - INFO - 123.160.223.74:58803 - "GET /favicon.ico HTTP/1.1" 404
+2026-07-10 11:42:56,638 - uvicorn.access - INFO - 45.133.173.245:12160 - "GET / HTTP/1.1" 200
+2026-07-10 11:42:56,957 - uvicorn.access - INFO - 154.16.44.150:6442 - "GET /favicon.ico HTTP/1.1" 404
+2026-07-10 11:42:57,273 - uvicorn.access - INFO - 45.133.173.81:8164 - "POST /mcp HTTP/1.1" 404
+2026-07-10 11:42:57,274 - uvicorn.access - INFO - 154.16.44.214:5146 - "POST / HTTP/1.1" 405
+2026-07-10 11:42:57,590 - uvicorn.access - INFO - 2.57.17.188:6466 - "GET /sse HTTP/1.1" 404
+2026-07-10 13:28:45,863 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-10 13:28:49,578 - uvicorn.access - INFO - 94.231.206.200:41861 - "GET / HTTP/1.1" 200
+2026-07-10 13:31:53,844 - uvicorn.access - INFO - 94.231.206.248:51153 - "GET /favicon.ico HTTP/1.1" 404
+2026-07-10 14:13:47,988 - uvicorn.access - INFO - 45.194.92.14:49478 - "GET / HTTP/1.1" 200
+2026-07-10 16:05:59,101 - uvicorn.access - INFO - 85.217.149.26:39558 - "GET / HTTP/1.1" 200
+2026-07-10 20:56:09,590 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-10 20:56:10,148 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-10 20:56:10,150 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-10 22:09:33,254 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-10 22:09:33,577 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-10 23:37:20,560 - uvicorn.access - INFO - 45.156.129.138:52052 - "GET / HTTP/1.1" 200
+2026-07-10 23:37:52,168 - uvicorn.access - INFO - 45.156.129.137:38686 - "GET /ext-js/app/common/zld_product_spec.js HTTP/1.1" 404
+2026-07-10 23:37:52,423 - uvicorn.access - INFO - 45.156.129.138:14032 - "GET /api/session/properties HTTP/1.1" 404
+2026-07-10 23:38:14,112 - uvicorn.access - INFO - 45.156.129.136:25638 - "GET / HTTP/1.1" 200
+2026-07-10 23:38:14,373 - uvicorn.access - INFO - 45.156.129.139:21558 - "GET / HTTP/1.1" 200
+2026-07-10 23:38:14,629 - uvicorn.access - INFO - 45.156.129.136:25646 - "GET /owncloud/status.php HTTP/1.1" 404
+2026-07-10 23:38:28,266 - uvicorn.access - INFO - 45.156.129.137:43200 - "GET /status.php HTTP/1.1" 404
+2026-07-10 23:38:43,477 - uvicorn.access - INFO - 45.156.129.136:21016 - "GET /console HTTP/1.1" 404
+2026-07-10 23:38:55,927 - uvicorn.access - INFO - 45.156.129.137:45302 - "GET /admin/ HTTP/1.1" 404
+2026-07-10 23:38:56,187 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-10 23:39:10,139 - uvicorn.access - INFO - 45.156.129.136:42508 - "GET /favicon.ico HTTP/1.1" 404
+2026-07-10 23:39:20,348 - uvicorn.access - INFO - 45.156.129.136:42994 - "GET / HTTP/1.1" 200
+2026-07-10 23:39:20,565 - uvicorn.access - INFO - 45.156.129.139:43518 - "GET /Web/Auth HTTP/1.1" 404
+2026-07-11 01:56:18,371 - uvicorn.access - INFO - 118.193.38.134:58696 - "GET / HTTP/1.1" 200
+2026-07-11 01:56:19,591 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-11 01:56:20,341 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-11 01:57:28,394 - uvicorn.access - INFO - 118.193.56.246:51016 - "GET / HTTP/1.1" 200
+2026-07-11 01:57:29,139 - uvicorn.access - INFO - 118.193.56.246:51214 - "GET /favicon.ico HTTP/1.1" 404
+2026-07-11 01:57:29,888 - uvicorn.access - INFO - 118.193.56.246:51420 - "GET /robots.txt HTTP/1.1" 404
+2026-07-11 01:57:29,889 - uvicorn.access - INFO - 118.193.56.246:51422 - "GET /sitemap.xml HTTP/1.1" 404
+2026-07-11 01:58:12,716 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-11 01:58:17,105 - uvicorn.access - INFO - 91.230.168.94:50461 - "GET / HTTP/1.1" 200
+2026-07-11 02:00:08,439 - uvicorn.access - INFO - 91.230.168.49:47167 - "GET /favicon.ico HTTP/1.1" 404
+2026-07-11 02:51:21,932 - uvicorn.access - INFO - 45.194.67.26:48428 - "GET / HTTP/1.1" 200
+2026-07-11 02:51:22,225 - uvicorn.access - INFO - 45.194.67.26:48430 - "GET /favicon.ico HTTP/1.1" 404
+2026-07-11 03:12:46,682 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-11 03:28:45,406 - uvicorn.access - INFO - 216.226.77.10:58170 - "GET / HTTP/1.1" 200
+2026-07-11 03:29:27,186 - uvicorn.access - INFO - 216.226.77.10:33114 - "GET /favicon.ico HTTP/1.1" 404
+2026-07-11 04:13:47,370 - uvicorn.access - INFO - 162.217.100.201:34006 - "GET / HTTP/1.1" 200
+2026-07-11 04:13:47,612 - uvicorn.access - INFO - 162.217.100.201:34020 - "GET /favicon.ico HTTP/1.1" 404
+2026-07-11 04:42:48,105 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-11 04:42:48,414 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-11 06:17:31,462 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-11 06:17:32,155 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-11 06:17:32,863 - uvicorn.access - INFO - 170.64.187.18:53532 - "GET / HTTP/1.0" 200
+2026-07-11 06:17:33,554 - uvicorn.access - INFO - 170.64.187.18:53536 - "OPTIONS / HTTP/1.0" 405
+2026-07-11 06:17:34,259 - uvicorn.access - INFO - 170.64.187.18:53548 - "GET /onvif/device_service HTTP/1.0" 404
+2026-07-11 06:17:34,999 - uvicorn.access - INFO - 170.64.187.18:53552 - "POST /onvif/device_service HTTP/1.1" 404
+2026-07-11 06:21:38,748 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-11 06:21:39,467 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-11 06:21:40,175 - uvicorn.access - INFO - 170.64.187.18:45986 - "GET / HTTP/1.0" 200
+2026-07-11 06:21:40,879 - uvicorn.access - INFO - 170.64.187.18:45988 - "OPTIONS / HTTP/1.0" 405
+2026-07-11 06:21:41,584 - uvicorn.access - INFO - 170.64.187.18:45992 - "GET /onvif/device_service HTTP/1.0" 404
+2026-07-11 06:21:42,275 - uvicorn.access - INFO - 170.64.187.18:59370 - "POST /onvif/device_service HTTP/1.1" 404
+2026-07-11 06:26:05,035 - uvicorn.access - INFO - 18.97.26.23:57840 - "GET / HTTP/1.1" 200
+2026-07-11 07:06:43,451 - uvicorn.access - INFO - 162.217.100.36:33888 - "GET / HTTP/1.1" 200
+2026-07-11 07:06:43,697 - uvicorn.access - INFO - 162.217.100.36:33900 - "GET /favicon.ico HTTP/1.1" 404
+2026-07-11 07:37:43,832 - uvicorn.access - INFO - 162.217.100.41:51826 - "GET / HTTP/1.1" 200
+2026-07-11 07:37:44,073 - uvicorn.access - INFO - 162.217.100.41:51836 - "GET /favicon.ico HTTP/1.1" 404
+2026-07-11 07:42:39,115 - uvicorn.access - INFO - 162.217.100.196:32902 - "GET / HTTP/1.1" 200
+2026-07-11 07:42:39,358 - uvicorn.access - INFO - 162.217.100.196:32912 - "GET /favicon.ico HTTP/1.1" 404
+2026-07-11 11:32:11,242 - uvicorn.access - INFO - 162.217.100.36:36000 - "GET / HTTP/1.1" 200
+2026-07-11 11:32:11,493 - uvicorn.access - INFO - 162.217.100.36:36016 - "GET /favicon.ico HTTP/1.1" 404
+2026-07-11 13:34:30,954 - uvicorn.access - INFO - 162.217.100.201:51450 - "GET / HTTP/1.1" 200
+2026-07-11 13:34:31,189 - uvicorn.access - INFO - 162.217.100.201:51466 - "GET /favicon.ico HTTP/1.1" 404
+2026-07-11 13:35:23,175 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-11 13:35:25,273 - uvicorn.access - INFO - 170.64.187.18:60076 - "GET / HTTP/1.0" 200
+2026-07-11 13:35:25,964 - uvicorn.access - INFO - 170.64.187.18:60086 - "OPTIONS / HTTP/1.0" 405
+2026-07-11 15:21:10,992 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-11 15:21:11,647 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-11 15:21:12,307 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-11 17:38:48,180 - uvicorn.access - INFO - 162.217.100.196:45396 - "GET / HTTP/1.1" 200
+2026-07-11 17:38:48,425 - uvicorn.access - INFO - 162.217.100.196:45410 - "GET /favicon.ico HTTP/1.1" 404
+2026-07-11 18:01:52,321 - uvicorn.access - INFO - 13.86.113.74:54730 - "GET / HTTP/1.1" 200
+2026-07-11 18:01:57,635 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-11 19:30:30,334 - uvicorn.error - WARNING - Invalid HTTP request received.
+2026-07-11 19:30:30,345 - uvicorn.access - INFO - 45.153.34.89:42636 - "GET /?pc_probe=ed166e54c7b33a61-ume HTTP/1.1" 200
+2026-07-11 19:30:30,708 - uvicorn.access - INFO - 45.153.34.89:42652 - "GET /?pc_probe=ed166e54c7b33a61-uuq HTTP/1.1" 200
+2026-07-11 20:13:00,399 - uvicorn.access - INFO - 162.217.100.41:53202 - "GET / HTTP/1.1" 200
+2026-07-11 20:13:00,646 - uvicorn.access - INFO - 162.217.100.41:53204 - "GET /favicon.ico HTTP/1.1" 404
+2026-07-11 20:20:05,620 - uvicorn.error - INFO - Shutting down
+2026-07-11 20:20:05,721 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-07-11 20:20:05,722 - uvicorn.error - INFO - Application shutdown complete.
+2026-07-11 20:20:05,722 - uvicorn.error - INFO - Finished server process [2568308]

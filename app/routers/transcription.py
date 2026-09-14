@@ -1,7 +1,7 @@
 import os
 import uuid
 import logging
-from fastapi import APIRouter, UploadFile, File, HTTPException, Query
+from fastapi import APIRouter, UploadFile, File, Form, HTTPException
 from fastapi.responses import PlainTextResponse, JSONResponse
 from app.config import get_settings, AVAILABLE_MODELS
 from app.services import whisper_service, subtitle_service, ffmpeg_service, history_service
@@ -11,6 +11,7 @@ settings = get_settings()
 router = APIRouter()
 
 ALLOWED_EXTENSIONS = {".mp3", ".mp4", ".wav", ".m4a", ".ogg", ".flac", ".mkv", ".webm", ".mov"}
+ALLOWED_SRT_EXTENSIONS = {".srt"}
 
 
 def _save_upload(file: UploadFile) -> tuple[str, int, str]:
@@ -103,11 +104,11 @@ def list_models():
 # ──────────────────────────────────────────────
 # Parâmetros comuns (documentação inline)
 # ──────────────────────────────────────────────
-_Q_LANGUAGE      = Query(default="pt",  description="Código do idioma (pt, en, es, ...)")
-_Q_MODEL         = Query(default=None,  description="Modelo (padrão: definido no .env)")
-_Q_WORD_TS       = Query(default=None,  description="Timestamps por palavra — true/false (padrão: true)")
-_Q_VAD           = Query(default=None,  description="Filtro VAD remove silêncios — true/false (padrão: true)")
-_Q_FFMPEG        = Query(default=False, description="Converte áudio para WAV 16kHz mono antes de transcrever (mais rápido)")
+_Q_LANGUAGE      = Form(default="pt",  description="Código do idioma (pt, en, es, ...)")
+_Q_MODEL         = Form(default=None,  description="Modelo (padrão: definido no .env)")
+_Q_WORD_TS       = Form(default=None,  description="Timestamps por palavra — true/false (padrão: true)")
+_Q_VAD           = Form(default=None,  description="Filtro VAD remove silêncios — true/false (padrão: true)")
+_Q_FFMPEG        = Form(default=False, description="Converte áudio para WAV 16kHz mono antes de transcrever (mais rápido)")
 
 
 # ──────────────────────────────────────────────
@@ -307,6 +308,98 @@ async def generate_both(
         raise HTTPException(status_code=500, detail=str(e))
     finally:
         ffmpeg_service.cleanup(converted_path)
+
+
+# ──────────────────────────────────────────────
+# POST /subtitle/burn
+# ──────────────────────────────────────────────
+@router.post("/subtitle/burn", summary="Incorporar legenda no vídeo")
+async def burn_subtitle(
+    file: UploadFile = File(..., description="Arquivo de vídeo"),
+    subtitle_file: UploadFile | None = File(None, description="Arquivo SRT (opcional)"),
+    language: str = _Q_LANGUAGE,
+    model: str = _Q_MODEL,
+    word_timestamps: bool = _Q_WORD_TS,
+    vad_filter: bool = _Q_VAD,
+    ffmpeg_convert: bool = _Q_FFMPEG,
+):
+    video_path = None
+    srt_path = None
+    converted_path = None
+    output_path = None
+    try:
+        # Salva o vídeo
+        video_path, size_bytes, original_filename = _save_upload(file)
+        video_ext = os.path.splitext(original_filename)[-1].lower()
+        if video_ext not in {".mp4", ".mkv", ".webm", ".mov"}:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Formato de vídeo não suportado: {video_ext}. Use: .mp4, .mkv, .webm, .mov",
+            )
+
+        # Determina o SRT
+        if subtitle_file and subtitle_file.filename:
+            # Modo SRT: salva o arquivo SRT enviado
+            srt_ext = os.path.splitext(subtitle_file.filename)[-1].lower()
+            if srt_ext not in ALLOWED_SRT_EXTENSIONS:
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"Formato de legenda não suportado: {srt_ext}. Use: .srt",
+                )
+            srt_contents = await subtitle_file.read()
+            srt_path = os.path.join(settings.UPLOAD_DIR, f"{uuid.uuid4().hex}.srt")
+            with open(srt_path, "wb") as f:
+                f.write(srt_contents)
+        else:
+            # Modo transcrição: transcreve e gera SRT
+            audio_path, converted_path = _prepare_audio(video_path, ffmpeg_convert)
+            result = whisper_service.transcribe(
+                audio_path,
+                language=language,
+                model_name=model,
+                word_timestamps=word_timestamps,
+                vad_filter=vad_filter,
+            )
+            srt = subtitle_service.generate_srt(result["segments"])
+            srt_path = os.path.join(settings.UPLOAD_DIR, f"{uuid.uuid4().hex}.srt")
+            with open(srt_path, "w", encoding="utf-8") as f:
+                f.write(srt)
+
+        # Incrusta legenda no vídeo
+        output_path = ffmpeg_service.burn_subtitle(video_path, srt_path)
+
+        # Salva no histórico
+        base = os.path.splitext(original_filename)[0]
+        meta = _save_history(
+            original_filename=original_filename,
+            audio_path=video_path,
+            size_bytes=size_bytes,
+            fmt="burn",
+            language=language,
+            model=model or settings.WHISPER_MODEL,
+            duration=0.0,
+            payload={"mode": "srt" if subtitle_file else "transcribe"},
+        )
+
+        # Retorna o vídeo como download
+        from fastapi.responses import FileResponse
+        return FileResponse(
+            path=output_path,
+            media_type="video/mp4",
+            filename=f"{base}_subtitled.mp4",
+            headers={
+                "X-History-Id": meta["id"],
+            },
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Erro ao incorporar legenda: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        ffmpeg_service.cleanup(converted_path)
+        ffmpeg_service.cleanup(srt_path)
+        # output_path não é limpo pois é retornado ao usuário
 
 
 # ──────────────────────────────────────────────
